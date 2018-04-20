@@ -149,6 +149,12 @@
                                 <rect key="frame" x="164.5" y="366" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDE-Dv-1tG" userLabel="TimeLabel">
+                                <rect key="frame" x="20" y="486" width="335" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -159,6 +165,7 @@
                             <constraint firstItem="Neu-my-rqz" firstAttribute="height" secondItem="wkl-33-Aaa" secondAttribute="height" id="7E2-XM-xET"/>
                             <constraint firstItem="Neu-my-rqz" firstAttribute="centerX" secondItem="BEI-oI-yaL" secondAttribute="centerX" id="DL3-Dw-e4y"/>
                             <constraint firstItem="S4T-Kg-3n0" firstAttribute="trailing" secondItem="wkl-33-Aaa" secondAttribute="trailing" constant="20" id="JeD-bJ-hri"/>
+                            <constraint firstItem="S4T-Kg-3n0" firstAttribute="trailing" secondItem="CDE-Dv-1tG" secondAttribute="trailing" constant="20" id="LJw-nP-SXK"/>
                             <constraint firstItem="tT1-4b-6aB" firstAttribute="top" secondItem="pZ5-cM-tcy" secondAttribute="bottom" constant="30" id="Nex-yQ-o2N"/>
                             <constraint firstItem="S4T-Kg-3n0" firstAttribute="trailing" secondItem="tT1-4b-6aB" secondAttribute="trailing" constant="20" id="P3K-IG-42l"/>
                             <constraint firstItem="wkl-33-Aaa" firstAttribute="centerX" secondItem="pca-LE-YGX" secondAttribute="centerX" id="PAc-vC-gcM"/>
@@ -171,16 +178,28 @@
                             <constraint firstItem="XNS-Uo-vJO" firstAttribute="leading" secondItem="S4T-Kg-3n0" secondAttribute="leading" constant="20" id="ddv-DK-TQW"/>
                             <constraint firstItem="pca-LE-YGX" firstAttribute="top" secondItem="wkl-33-Aaa" secondAttribute="bottom" constant="15" id="e78-Zp-OaF"/>
                             <constraint firstItem="Neu-my-rqz" firstAttribute="width" secondItem="wkl-33-Aaa" secondAttribute="width" id="eJj-Th-9bc"/>
+                            <constraint firstItem="CDE-Dv-1tG" firstAttribute="top" secondItem="xss-AI-zvx" secondAttribute="bottom" constant="90" id="eba-Ws-G5y"/>
                             <constraint firstItem="wkl-33-Aaa" firstAttribute="leading" secondItem="Neu-my-rqz" secondAttribute="trailing" constant="15" id="g3Y-P6-sxu"/>
                             <constraint firstItem="Neu-my-rqz" firstAttribute="top" secondItem="XNS-Uo-vJO" secondAttribute="bottom" constant="20" id="g8k-xY-Bex"/>
                             <constraint firstItem="pZ5-cM-tcy" firstAttribute="top" secondItem="S4T-Kg-3n0" secondAttribute="top" constant="30" id="lOP-CB-qOF"/>
                             <constraint firstItem="Neu-my-rqz" firstAttribute="height" secondItem="BEI-oI-yaL" secondAttribute="height" id="ocp-7J-rGa"/>
+                            <constraint firstItem="CDE-Dv-1tG" firstAttribute="leading" secondItem="S4T-Kg-3n0" secondAttribute="leading" constant="20" id="qdM-Fc-aBq"/>
                             <constraint firstItem="BEI-oI-yaL" firstAttribute="width" secondItem="pca-LE-YGX" secondAttribute="width" id="rKQ-WV-Mhu"/>
                             <constraint firstItem="BEI-oI-yaL" firstAttribute="height" secondItem="pca-LE-YGX" secondAttribute="height" id="uCC-7X-jxC"/>
                             <constraint firstItem="Neu-my-rqz" firstAttribute="centerY" secondItem="wkl-33-Aaa" secondAttribute="centerY" id="uqm-Ry-lpb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="S4T-Kg-3n0"/>
                     </view>
+                    <connections>
+                        <outlet property="buttonA" destination="Neu-my-rqz" id="zhR-nu-gk8"/>
+                        <outlet property="buttonB" destination="wkl-33-Aaa" id="hkM-iF-Rv7"/>
+                        <outlet property="buttonC" destination="BEI-oI-yaL" id="FEd-VW-T7g"/>
+                        <outlet property="buttonD" destination="pca-LE-YGX" id="Y7L-wl-cWJ"/>
+                        <outlet property="questionNumberLabel" destination="tT1-4b-6aB" id="We7-NI-d1d"/>
+                        <outlet property="questionText" destination="RjJ-DD-RJE" id="Dui-L9-7S7"/>
+                        <outlet property="scoreLabel" destination="pZ5-cM-tcy" id="AzM-Fg-R0h"/>
+                        <outlet property="timeLabel" destination="CDE-Dv-1tG" id="uf2-d8-Es6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TzP-OX-hPB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
