@@ -43,7 +43,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
         let notifyChange = NSKeyedArchiver.archivedData(withRootObject: notifyChangeMessage)
         if gameTypeSegmentedButton.selectedSegmentIndex == 0 {
             if session.connectedPeers.count == 0 {
-                performSegue(withIdentifier: "ToGame", sender: self)
+                performSegue(withIdentifier: "ToGameSingle", sender: self)
             } else  {
                 alertMessage(problem: "Cannot Play Solo While Connected to Peers")
             }

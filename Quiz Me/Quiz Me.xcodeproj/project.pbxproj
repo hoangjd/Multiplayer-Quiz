@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D81E6D76208A3B69006FE248 /* SingleGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81E6D75208A3B69006FE248 /* SingleGameViewController.swift */; };
 		D82843002089733700953EA8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82842FF2089733700953EA8 /* GameViewController.swift */; };
 		D84BCD5420891F3C00F5F3C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84BCD5320891F3C00F5F3C1 /* AppDelegate.swift */; };
 		D84BCD5620891F3C00F5F3C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84BCD5520891F3C00F5F3C1 /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D81E6D75208A3B69006FE248 /* SingleGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleGameViewController.swift; sourceTree = "<group>"; };
 		D82842FF2089733700953EA8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		D84BCD5020891F3C00F5F3C1 /* Quiz Me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quiz Me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84BCD5320891F3C00F5F3C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				D84BCD5320891F3C00F5F3C1 /* AppDelegate.swift */,
 				D84BCD5520891F3C00F5F3C1 /* ViewController.swift */,
 				D82842FF2089733700953EA8 /* GameViewController.swift */,
+				D81E6D75208A3B69006FE248 /* SingleGameViewController.swift */,
 				D84BCD5720891F3C00F5F3C1 /* Main.storyboard */,
 				D84BCD5A20891F3C00F5F3C1 /* Assets.xcassets */,
 				D84BCD5C20891F3C00F5F3C1 /* LaunchScreen.storyboard */,
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D81E6D76208A3B69006FE248 /* SingleGameViewController.swift in Sources */,
 				D84BCD5620891F3C00F5F3C1 /* ViewController.swift in Sources */,
 				D82843002089733700953EA8 /* GameViewController.swift in Sources */,
 				D84BCD5420891F3C00F5F3C1 /* AppDelegate.swift in Sources */,
