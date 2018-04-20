@@ -101,11 +101,11 @@
 			children = (
 				D84BCD5320891F3C00F5F3C1 /* AppDelegate.swift */,
 				D84BCD5520891F3C00F5F3C1 /* ViewController.swift */,
+				D82842FF2089733700953EA8 /* GameViewController.swift */,
 				D84BCD5720891F3C00F5F3C1 /* Main.storyboard */,
 				D84BCD5A20891F3C00F5F3C1 /* Assets.xcassets */,
 				D84BCD5C20891F3C00F5F3C1 /* LaunchScreen.storyboard */,
 				D84BCD5F20891F3D00F5F3C1 /* Info.plist */,
-				D82842FF2089733700953EA8 /* GameViewController.swift */,
 			);
 			path = "Quiz Me";
 			sourceTree = "<group>";

@@ -17,7 +17,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     
     var browser: MCBrowserViewController!
     var assistant: MCAdvertiserAssistant!
-    var connectedPeers: [MCPeerID]!
+  //  var connectedPeers: [MCPeerID]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
         self.session = MCSession(peer: peerID)
         self.browser = MCBrowserViewController(serviceType: "gaming", session: session)
         self.assistant = MCAdvertiserAssistant(serviceType: "gaming", discoveryInfo: nil, session: session)
-        connectedPeers = [MCPeerID]()
+     //   connectedPeers = [MCPeerID]()
         
         assistant.start()
         session.delegate = self
@@ -39,11 +39,40 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     }
     
     @IBAction func startGameClicked(_ sender: UIButton) {
+        let notifyChangeMessage = "Move"
+        let notifyChange = NSKeyedArchiver.archivedData(withRootObject: notifyChangeMessage)
         if gameTypeSegmentedButton.selectedSegmentIndex == 0 {
-            if connectedPeers.count == 0 {
+            if session.connectedPeers.count == 0 {
+                performSegue(withIdentifier: "ToGame", sender: self)
+            } else  {
+                alertMessage(problem: "Cannot Play Solo While Connected to Peers")
+            }
+        }
+        if gameTypeSegmentedButton.selectedSegmentIndex == 1 {
+            if session.connectedPeers.count > 3 {
+                 alertMessage(problem: "Cannot Play Multiplayer With More Than 4 Peeps")
+            } else if session.connectedPeers.count == 0 {
+                alertMessage(problem: "Cannot Play Multiplayer Without Any Connections")
+            } else {
+                sendViewControllerChange(dataToSend: notifyChange)
                 performSegue(withIdentifier: "ToGame", sender: self)
             }
         }
+    }
+    
+    func sendViewControllerChange(dataToSend: Data) {
+        do{
+            try session.send(dataToSend, toPeers: session.connectedPeers, with: .unreliable)
+        }
+        catch let err {
+            print("Error in sending data \(err)")
+        }
+    }
+    
+    func alertMessage(problem: String) {
+        var alert = UIAlertController(title: "Error", message: problem, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
@@ -58,7 +87,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
         switch state {
         case MCSessionState.connected:
             print("Connected: \(peerID.displayName)")
-            connectedPeers.append(peerID)
+     //       connectedPeers.append(peerID)
             
         case MCSessionState.connecting:
             print("Connecting: \(peerID.displayName)")
@@ -69,7 +98,13 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        
+        DispatchQueue.main.async {
+            if let recievedMessage = NSKeyedUnarchiver.unarchiveObject(with: data) as? String {
+                if recievedMessage == "Move" {
+                    self.performSegue(withIdentifier: "ToGame", sender: self)
+                }
+            }
+        }
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
