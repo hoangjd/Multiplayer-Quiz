@@ -267,25 +267,25 @@
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="D"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwe-g2-R3u" userLabel="Player1Choice">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwe-g2-R3u" userLabel="Player1Choice">
                                 <rect key="frame" x="20" y="94" width="70" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyC-aC-NYb" userLabel="Player2Choice">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyC-aC-NYb" userLabel="Player2Choice">
                                 <rect key="frame" x="106" y="94" width="70" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1KQ-Zy-53Q" userLabel="Player3Choice">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1KQ-Zy-53Q" userLabel="Player3Choice">
                                 <rect key="frame" x="195.5" y="94.5" width="70" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEB-1e-OqJ" userLabel="Player4Choice">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEB-1e-OqJ" userLabel="Player4Choice">
                                 <rect key="frame" x="285.5" y="93" width="70" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -306,7 +306,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person4 " translatesAutoresizingMaskIntoConstraints="NO" id="9Nk-lc-Jtt">
                                 <rect key="frame" x="285.5" y="134.5" width="69.5" height="70"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhH-1E-Qig" userLabel="QuestionNum">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhH-1E-Qig" userLabel="QuestionNum">
                                 <rect key="frame" x="20" y="250.5" width="335" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -421,10 +421,26 @@
                         <viewLayoutGuide key="safeArea" id="qoa-bX-ggx"/>
                     </view>
                     <connections>
-                        <outletCollection property="ArrayOfImageViews" destination="49B-eW-r2g" collectionClass="NSMutableArray" id="G6s-aU-Wzt"/>
-                        <outletCollection property="ArrayOfImageViews" destination="B66-Nf-BWn" collectionClass="NSMutableArray" id="qdl-GO-5CD"/>
-                        <outletCollection property="ArrayOfImageViews" destination="0Sh-6O-qKN" collectionClass="NSMutableArray" id="P7P-JB-UUj"/>
-                        <outletCollection property="ArrayOfImageViews" destination="9Nk-lc-Jtt" collectionClass="NSMutableArray" id="1gP-G3-CPe"/>
+                        <outlet property="buttonA" destination="nuH-uW-Alp" id="Gja-Kl-y4o"/>
+                        <outlet property="buttonB" destination="WQq-BZ-aCz" id="vw8-jh-ptU"/>
+                        <outlet property="buttonC" destination="6rO-zO-9Yr" id="Obs-Vw-oat"/>
+                        <outlet property="buttonD" destination="v7H-YU-OcQ" id="tFZ-zi-93K"/>
+                        <outlet property="questionNumLabel" destination="MhH-1E-Qig" id="37G-lf-Yif"/>
+                        <outlet property="questionText" destination="yR9-cq-M81" id="GJp-XI-Gwr"/>
+                        <outlet property="restartButton" destination="GuR-9j-9py" id="8aj-18-q1C"/>
+                        <outlet property="winLabel" destination="gmd-Qe-zvn" id="Vxs-Kv-bWs"/>
+                        <outletCollection property="arrayOfImages" destination="49B-eW-r2g" collectionClass="NSMutableArray" id="G6s-aU-Wzt"/>
+                        <outletCollection property="arrayOfImages" destination="B66-Nf-BWn" collectionClass="NSMutableArray" id="qdl-GO-5CD"/>
+                        <outletCollection property="arrayOfImages" destination="0Sh-6O-qKN" collectionClass="NSMutableArray" id="P7P-JB-UUj"/>
+                        <outletCollection property="arrayOfImages" destination="9Nk-lc-Jtt" collectionClass="NSMutableArray" id="1gP-G3-CPe"/>
+                        <outletCollection property="arrayOfUserChoices" destination="cwe-g2-R3u" collectionClass="NSMutableArray" id="PRz-KS-Sx3"/>
+                        <outletCollection property="arrayOfUserChoices" destination="iyC-aC-NYb" collectionClass="NSMutableArray" id="hlv-9e-aAs"/>
+                        <outletCollection property="arrayOfUserChoices" destination="1KQ-Zy-53Q" collectionClass="NSMutableArray" id="dUZ-vK-FA2"/>
+                        <outletCollection property="arrayOfUserChoices" destination="lEB-1e-OqJ" collectionClass="NSMutableArray" id="egS-zG-7QZ"/>
+                        <outletCollection property="arrayOfUserScores" destination="mWE-IS-dwP" collectionClass="NSMutableArray" id="Rbn-Zj-4ZS"/>
+                        <outletCollection property="arrayOfUserScores" destination="ZIE-LK-gHF" collectionClass="NSMutableArray" id="xCL-bG-X4x"/>
+                        <outletCollection property="arrayOfUserScores" destination="i4u-AA-REX" collectionClass="NSMutableArray" id="oIu-Jz-RBN"/>
+                        <outletCollection property="arrayOfUserScores" destination="JU8-Hb-lL7" collectionClass="NSMutableArray" id="ScQ-9Y-24e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wah-uN-kRe" userLabel="First Responder" sceneMemberID="firstResponder"/>
