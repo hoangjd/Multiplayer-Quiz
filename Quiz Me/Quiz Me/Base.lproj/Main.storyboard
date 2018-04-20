@@ -29,6 +29,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WBB-cT-UIY" userLabel="StartButton">
                                 <rect key="frame" x="148.5" y="382.5" width="78" height="30"/>
                                 <state key="normal" title="Start Game"/>
+                                <connections>
+                                    <action selector="startGameClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w26-Vc-i3I"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QuizMe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ft4-te-wsv" userLabel="Title">
                                 <rect key="frame" x="30" y="89" width="315" height="21"/>
@@ -75,17 +78,18 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="ylf-L2-e9W" kind="show" id="D8A-if-cDe"/>
+                        <outlet property="gameTypeSegmentedButton" destination="rWl-WM-hz4" id="oye-1O-Xwm"/>
+                        <segue destination="ylf-L2-e9W" kind="show" identifier="ToGame" id="D8A-if-cDe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="456.80000000000001" y="118.29085457271366"/>
         </scene>
-        <!--View Controller-->
+        <!--Game View Controller-->
         <scene sceneID="oma-eS-fGA">
             <objects>
-                <viewController id="ylf-L2-e9W" sceneMemberID="viewController">
+                <viewController id="ylf-L2-e9W" customClass="GameViewController" customModule="Quiz_Me" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yn0-AU-h2I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
