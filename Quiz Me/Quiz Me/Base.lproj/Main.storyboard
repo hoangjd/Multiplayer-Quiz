@@ -95,20 +95,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZ5-cM-tcy" userLabel="Score">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZ5-cM-tcy" userLabel="Score">
                                 <rect key="frame" x="20" y="94" width="335" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tT1-4b-6aB" userLabel="QuestionNum">
-                                <rect key="frame" x="20" y="145" width="335" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tT1-4b-6aB" userLabel="QuestionNum">
+                                <rect key="frame" x="20" y="145" width="335" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XNS-Uo-vJO" userLabel="QuestionBox">
-                                <rect key="frame" x="20" y="176" width="335" height="70"/>
+                                <rect key="frame" x="20" y="175.5" width="335" height="70"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RjJ-DD-RJE">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="70"/>
@@ -126,31 +126,46 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Neu-my-rqz" userLabel="AnswerA">
-                                <rect key="frame" x="20" y="266" width="160" height="30"/>
+                                <rect key="frame" x="20" y="265.5" width="160" height="30"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="A"/>
+                                <connections>
+                                    <action selector="buttonAClicked:" destination="TqW-7z-5Fv" eventType="touchUpInside" id="dgL-dD-7SE"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkl-33-Aaa" userLabel="AnswerB">
-                                <rect key="frame" x="195" y="266" width="160" height="30"/>
+                                <rect key="frame" x="195" y="265.5" width="160" height="30"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="B"/>
+                                <connections>
+                                    <action selector="buttonBClicked:" destination="TqW-7z-5Fv" eventType="touchUpInside" id="bk8-mS-hWl"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEI-oI-yaL" userLabel="AnswerC">
-                                <rect key="frame" x="20" y="311" width="160" height="30"/>
+                                <rect key="frame" x="20" y="310.5" width="160" height="30"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="C"/>
+                                <connections>
+                                    <action selector="buttonCClicked:" destination="TqW-7z-5Fv" eventType="touchUpInside" id="nRL-Wa-Sxr"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pca-LE-YGX" userLabel="AnswerD">
-                                <rect key="frame" x="195" y="311" width="160" height="30"/>
+                                <rect key="frame" x="195" y="310.5" width="160" height="30"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="D"/>
+                                <connections>
+                                    <action selector="buttonDClicked:" destination="TqW-7z-5Fv" eventType="touchUpInside" id="OhH-QE-n3W"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xss-AI-zvx" userLabel="Restart">
-                                <rect key="frame" x="164.5" y="366" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="140.5" y="365.5" width="94" height="30"/>
+                                <state key="normal" title="Restart Game"/>
+                                <connections>
+                                    <action selector="restartGameClicked:" destination="TqW-7z-5Fv" eventType="touchUpInside" id="DZH-mZ-cPp"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDE-Dv-1tG" userLabel="TimeLabel">
-                                <rect key="frame" x="20" y="486" width="335" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDE-Dv-1tG" userLabel="TimeLabel">
+                                <rect key="frame" x="20" y="485.5" width="335" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -197,6 +212,7 @@
                         <outlet property="buttonD" destination="pca-LE-YGX" id="Y7L-wl-cWJ"/>
                         <outlet property="questionNumberLabel" destination="tT1-4b-6aB" id="We7-NI-d1d"/>
                         <outlet property="questionText" destination="RjJ-DD-RJE" id="Dui-L9-7S7"/>
+                        <outlet property="restartGameButton" destination="xss-AI-zvx" id="tfw-Uw-Lj6"/>
                         <outlet property="scoreLabel" destination="pZ5-cM-tcy" id="AzM-Fg-R0h"/>
                         <outlet property="timeLabel" destination="CDE-Dv-1tG" id="uf2-d8-Es6"/>
                     </connections>

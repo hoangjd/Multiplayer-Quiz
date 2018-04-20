@@ -14,22 +14,25 @@ class SingleGameViewController: UIViewController {
     @IBOutlet weak var buttonB: UIButton!
     @IBOutlet weak var buttonC: UIButton!
     @IBOutlet weak var buttonD: UIButton!
+    @IBOutlet weak var restartGameButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var questionNumberLabel: UILabel!
     @IBOutlet weak var questionText: UITextView!
     @IBOutlet weak var timeLabel: UILabel!
     
     var numberOfQuestions: Int!
-    var timeToNextQuestion = 0
-    var moveToNextQuestion = false
+    var timeToNextQuestion: Int!
+    var moveToNextQuestion: Bool!
     var correctAnswer: String!
-    var count = 0
+    var count: Int = 0
+    var userChoice: String!
+    var doubleClick: Bool!
+    var userScore: Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        getNumberOfQuestions()
-        changeTimeLabel()
-        startTimer()
+        initializeValues()
+
        // developQuestion()
 //        getJSONData(questionNumber: 0)
 
@@ -38,80 +41,62 @@ class SingleGameViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func initializeValues() {
+        numberOfQuestions = -2
+        timeToNextQuestion = 0
+        moveToNextQuestion = false
+        count = 0
+        doubleClick = false
+        userScore = 0
+        changeScoreLabel()
+        restartGameButton.isHidden = true
+        changeTimeLabel()
+        startTimer()
+    }
+    
     func startTimer() {
         let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(updateTime)), userInfo: nil, repeats: true)
     }
     
     @objc func updateTime(_ sender: Timer) {
-        timeToNextQuestion += 1
-        changeTimeLabel()
-        if count == 4 {
+        timeToNextQuestion! += 1
+        if (count > (numberOfQuestions) && count != 0) {
+            restartGameButton.isHidden = false
             sender.invalidate()
-        }
-        
-        if count == 0 && timeToNextQuestion == 1{
-//            moveToNextQuestion = false
-//            var playerHasAnswered = false
-            getJSONData(questionNumber: count)
-            count += 1
-        }
-        
-        if timeToNextQuestion%20 == 0 {
-            timeToNextQuestion = 0
-            getJSONData(questionNumber: count)
-            count += 1
+        } else {
+             changeTimeLabel()
+            
+            if count == 0 && timeToNextQuestion == 1{
+    //            moveToNextQuestion = false
+    //            var playerHasAnswered = false
+                getJSONData(questionNumber: count)
+                count += 1
+            }
+            
+            if timeToNextQuestion%20 == 0 {
+                checkAnswer()
+                clearButtons()
+                doubleClick = false
+                timeToNextQuestion = 0
+                if count != 4 {
+                    getJSONData(questionNumber: count)
+                }
+                count += 1
+            }
         }
     }
+    
     func changeTimeLabel() {
         var time = String(20 - timeToNextQuestion)
         timeLabel.text = ("Time Left: \(time)")
     }
     
-    func getNumberOfQuestions() {
-        let urlString = "http://www.people.vcu.edu/~ebulut/jsonFiles/quiz1.json"
-        
-        
-        let url = URL(string: urlString)
-        
-        let session = URLSession.shared
-        
-        // create a data task
-        let task = session.dataTask(with: url!, completionHandler: { (data, response, error) in
-            
-            if let result = data{
-                
-                print("inside get JSON")
-                print(result)
-                do{
-                    let json = try JSONSerialization.jsonObject(with: result, options: .allowFragments)
-                    
-                    if let dictionary = json as? [String:Any]{
-                        self.numberOfQuestions = dictionary["numberOfQuestions"] as! Int
-
-                    }
-                }
-                catch{
-                    print("Error")
-                }
-            }
-            })
-            // always call resume() to start
-            task.resume()
-            
+    func changeScoreLabel() {
+        var score = String(userScore!)
+        scoreLabel.text = ("Score: \(score)")
     }
     
-//    func developQuestion(){
-//
-//     //   for i in 0..<numberOfQuestions {
-//        for i in 0..<4 {
-//            moveToNextQuestion = false
-//            var playerHasAnswered = false
-//            getJSONData(questionNumber: i)
-////            while (!moveToNextQuestion || !playerHasAnswered) {
-////
-////            }
-//        }
-//    }
+    
     
     func getJSONData(questionNumber: Int){
         
@@ -136,6 +121,7 @@ class SingleGameViewController: UIViewController {
                     
                     if let dictionary = json as? [String:Any]{
                         let numberOfQuestions = dictionary["numberOfQuestions"] as! Int
+                        self.numberOfQuestions = numberOfQuestions
                         if let allQuestion = dictionary["questions"] as? [[String:Any]] {
                          //   for i in 0..<numberOfQuestions {
                             let questionNum = allQuestion[questionNumber]["number"] as! Int
@@ -172,7 +158,66 @@ class SingleGameViewController: UIViewController {
     }
     
     
-
+    @IBAction func buttonAClicked(_ sender: UIButton) {
+        buttonLogic(sender: sender)
+    }
+    
+    @IBAction func buttonBClicked(_ sender: UIButton) {
+        buttonLogic(sender: sender)
+    }
+    
+    @IBAction func buttonCClicked(_ sender: UIButton) {
+        buttonLogic(sender: sender)
+    }
+    
+    @IBAction func buttonDClicked(_ sender: UIButton) {
+        buttonLogic(sender: sender)
+    }
+    
+    func buttonLogic(sender: UIButton) {
+        if !doubleClick {
+            if sender.backgroundColor == UIColor.red {
+                doubleClick = true
+                sender.backgroundColor = UIColor.green
+            } else {
+                clearButtons()
+                sender.backgroundColor = UIColor.red
+            }
+        }
+    }
+    
+    func checkAnswer() {
+        var userAnswer = ""
+        switch UIColor.green {
+        case buttonA.backgroundColor:
+            userAnswer = "A"
+        case buttonB.backgroundColor:
+            userAnswer = "B"
+        case buttonC.backgroundColor:
+            userAnswer = "C"
+        case buttonD.backgroundColor:
+            userAnswer = "D"
+        default:
+            userAnswer = ""
+        }
+        if userAnswer == correctAnswer {
+            userScore! += 1
+            changeScoreLabel()
+        }
+    }
+    
+    func clearButtons() {
+        buttonA.backgroundColor = UIColor.lightGray
+        buttonB.backgroundColor = UIColor.lightGray
+        buttonC.backgroundColor = UIColor.lightGray
+        buttonD.backgroundColor = UIColor.lightGray
+    }
+    
+    
+    @IBAction func restartGameClicked(_ sender: UIButton) {
+        initializeValues()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
