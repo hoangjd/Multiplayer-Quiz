@@ -119,6 +119,13 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? GameViewController {
+            destination.session = self.session
+            destination.peerID = self.peerID
+        }
+    }
+    
     
     
     
