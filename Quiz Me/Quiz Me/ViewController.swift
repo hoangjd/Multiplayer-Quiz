@@ -39,6 +39,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     }
     
     @IBAction func connectToUsers(_ sender: UIBarButtonItem) {
+  //      initializeVals()
          present(browser, animated: true, completion: nil)
     }
     
@@ -131,9 +132,11 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
         }
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        initializeVals()
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        if self.session.connectedPeers.count == 0 {
+            initializeVals()
+        }
+    }
     
     
     

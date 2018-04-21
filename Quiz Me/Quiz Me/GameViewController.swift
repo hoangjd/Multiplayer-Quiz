@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class GameViewController: UIViewController, MCSessionDelegate {
+class GameViewController: UIViewController, MCSessionDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var buttonA: UIButton!
     @IBOutlet weak var buttonB: UIButton!
@@ -64,6 +64,7 @@ class GameViewController: UIViewController, MCSessionDelegate {
         doubleClick = false
         userScore = 0
         correctAnswer = "A"
+        initializeScores()
         setUpPlayersImages()
         
     }
@@ -195,6 +196,13 @@ class GameViewController: UIViewController, MCSessionDelegate {
         buttonD.backgroundColor = UIColor.lightGray
     }
     
+    func initializeScores(){
+        arrayOfUserScores[0].text = String(userScore!)
+        for i in 0..<session.connectedPeers.count {
+            arrayOfUserScores[i+1].text = "0"
+        }
+    }
+    
     
 
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
@@ -222,6 +230,7 @@ class GameViewController: UIViewController, MCSessionDelegate {
                 for i in 0..<session.connectedPeers.count {
                     if session.connectedPeers[i] == peerID {
                         self.arrayOfUserChoices[i+1].text = receivedString
+
                     }
                 }
             }
@@ -271,8 +280,17 @@ class GameViewController: UIViewController, MCSessionDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.session.disconnect()
-    }
+        }
     
+ //   }
+    
+//    extension GameViewController: UINavigationControllerDelegate {
+//        func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+//            (viewController as? ProgressTableViewController)?.data = data // Here you pass the to your original view controller
+//        }
+//    }
+//
+
 
     
 
@@ -295,3 +313,5 @@ class GameViewController: UIViewController, MCSessionDelegate {
     */
 
 }
+
+
