@@ -251,21 +251,33 @@
                                 <rect key="frame" x="20" y="377" width="160" height="30"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="A"/>
+                                <connections>
+                                    <action selector="buttonAClicked:" destination="ylf-L2-e9W" eventType="touchUpInside" id="Sl0-PA-6Ee"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQq-BZ-aCz" userLabel="AnswerB">
                                 <rect key="frame" x="195" y="377" width="160" height="30"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="B"/>
+                                <connections>
+                                    <action selector="buttonBClicked:" destination="ylf-L2-e9W" eventType="touchUpInside" id="Ew9-2o-b4h"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rO-zO-9Yr" userLabel="AnswerC">
                                 <rect key="frame" x="20" y="422" width="160" height="30"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="C"/>
+                                <connections>
+                                    <action selector="buttonCClicked:" destination="ylf-L2-e9W" eventType="touchUpInside" id="fWm-2V-DSr"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v7H-YU-OcQ" userLabel="AnswerD">
                                 <rect key="frame" x="195" y="422" width="160" height="30"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="D"/>
+                                <connections>
+                                    <action selector="buttonDClicked:" destination="ylf-L2-e9W" eventType="touchUpInside" id="xAx-hd-21E"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwe-g2-R3u" userLabel="Player1Choice">
                                 <rect key="frame" x="20" y="94" width="70" height="20.5"/>

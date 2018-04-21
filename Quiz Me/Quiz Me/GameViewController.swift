@@ -41,6 +41,10 @@ class GameViewController: UIViewController, MCSessionDelegate {
     
     var session: MCSession!
     var peerID: MCPeerID!
+    var doubleClick: Bool!
+    var userScore: Int!
+    var correctAnswer: String!
+   // var userAnswer: String!
     
 
     @IBOutlet var arrayOfImages: [UIImageView]!
@@ -57,7 +61,11 @@ class GameViewController: UIViewController, MCSessionDelegate {
     func initializeValues() {
         restartButton.isHidden = true
         winLabel.isHidden = true
+        doubleClick = false
+        userScore = 0
+        correctAnswer = "A"
         setUpPlayersImages()
+        
     }
     
     
@@ -76,13 +84,168 @@ class GameViewController: UIViewController, MCSessionDelegate {
 
     }
     
+    @IBAction func buttonAClicked(_ sender: UIButton) {
+        buttonLogic(sender: sender)
+     //   checkForUserChoice()
+    }
+    
+    @IBAction func buttonBClicked(_ sender: UIButton) {
+        buttonLogic(sender: sender)
+    //    checkForUserChoice()
+    }
+    
+    @IBAction func buttonCClicked(_ sender: UIButton) {
+        buttonLogic(sender: sender)
+     //   checkForUserChoice()
+    }
+    
+    @IBAction func buttonDClicked(_ sender: UIButton) {
+        buttonLogic(sender: sender)
+       // checkForUserChoice()
+    }
+    
+    func buttonLogic(sender: UIButton) {
+        if !doubleClick {
+            if sender.backgroundColor == UIColor.red {
+                doubleClick = true
+                sender.backgroundColor = UIColor.green
+                checkForUserChoice()
+                addScore()
+            } else {
+                clearButtons()
+                sender.backgroundColor = UIColor.red
+            }
+        }
+    }
+    
+    func checkForUserChoice() {
+        var userAnswer = ""
+        switch UIColor.green {
+        case buttonA.backgroundColor:
+            userAnswer = "A"
+            setAndSendAnswer(answer: userAnswer)
+        case buttonB.backgroundColor:
+            userAnswer = "B"
+            setAndSendAnswer(answer: userAnswer)
+        case buttonC.backgroundColor:
+            userAnswer = "C"
+            setAndSendAnswer(answer: userAnswer)
+        case buttonD.backgroundColor:
+            userAnswer = "D"
+            setAndSendAnswer(answer: userAnswer)
+        default:
+            userAnswer = "..."
+            setAndSendAnswer(answer: userAnswer)
+        }
+//        if userAnswer == correctAnswer {
+//            userScore! += 1
+//
+//         //   changeScoreLabel()
+//        }
+    }
+    
+    func addScore() {
+        
+        let mychoice = arrayOfUserChoices[0].text!
+        if mychoice == correctAnswer {
+            userScore! += 1
+            arrayOfUserScores[0].text = String("\(userScore!)")
+        }
+        
+        let notifyUsersOfScore = NSKeyedArchiver.archivedData(withRootObject: userScore!)
+        do {
+            try session.send(notifyUsersOfScore, toPeers: session.connectedPeers, with: .unreliable)
+        }
+        catch let err {
+            print ("Error in sending Score \(err)")
+        }
+        
+        
+//        for i in 0..<session.connectedPeers.count +1 {
+//            if arrayOfUserChoices[i].text! == correctAnswer {
+//                arrayOfUserScores[i].text ==
+//            }
+//        }
+    }
+    
+    func setAndSendAnswer(answer: String) {
+        arrayOfUserChoices[0].text = answer
+        showUserAnswer(ans: answer)
+    }
+    
+    func showUserAnswer(ans: String) {
+        let notifyUsersOfAnswer = NSKeyedArchiver.archivedData(withRootObject: ans)
+        do {
+            try session.send(notifyUsersOfAnswer, toPeers: session.connectedPeers, with: .unreliable)
+        }
+        catch let err {
+            print ("Error in sending data \(err)")
+        }
+//        for i in 0..<session.connectedPeers.count {
+//            if session.connectedPeers[i] == peer {
+//                arrayOfUserChoices[i].text = ans
+//            }
+//        }
+    }
+    
+    func clearButtons() {
+        buttonA.backgroundColor = UIColor.lightGray
+        buttonB.backgroundColor = UIColor.lightGray
+        buttonC.backgroundColor = UIColor.lightGray
+        buttonD.backgroundColor = UIColor.lightGray
+    }
+    
+    
 
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        
+        switch state {
+        case MCSessionState.connected:
+            print("Connected: \(peerID.displayName)")
+            //       connectedPeers.append(peerID)
+            
+        case MCSessionState.connecting:
+            print("Connecting: \(peerID.displayName)")
+            
+        case MCSessionState.notConnected:
+            print("Not Connected: \(peerID.displayName)")
+        }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        print("inside didReceiveData")
         
+        // this needs to be run on the main thread
+        print(session.connectedPeers.count)
+        DispatchQueue.main.async(execute: {
+            
+            if let receivedString = NSKeyedUnarchiver.unarchiveObject(with: data) as? String{
+                for i in 0..<session.connectedPeers.count {
+                    if session.connectedPeers[i] == peerID {
+                        self.arrayOfUserChoices[i+1].text = receivedString
+                    }
+                }
+            }
+            
+            if let receviedInt = NSKeyedUnarchiver.unarchiveObject(with: data) as? Int{
+                for i in 0..<session.connectedPeers.count {
+                    if session.connectedPeers[i] == peerID {
+                        self.arrayOfUserScores[i+1].text = String(receviedInt)
+                    }
+                }
+            }
+        })
+            
+//            if let image = UIImage(data: data) {
+//
+//                self.imgView.image = image
+//
+//                self.updateChatView(newText: "received image", id: peerID)
+//
+//                //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+//
+//            }
+//
+//        })
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -98,7 +261,21 @@ class GameViewController: UIViewController, MCSessionDelegate {
     }
     
 
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destination = segue.destination as? ViewController {
+//            destination.session = self.session
+//            destination.peerID = self.peerID
+//            session.delegate = destination
+//        }
+//    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.session.disconnect()
+    }
+    
+
+    
+
 
 
     override func didReceiveMemoryWarning() {

@@ -22,16 +22,20 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initializeVals()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func initializeVals() {
         self.peerID = MCPeerID(displayName: UIDevice.current.name)
         self.session = MCSession(peer: peerID)
         self.browser = MCBrowserViewController(serviceType: "gaming", session: session)
         self.assistant = MCAdvertiserAssistant(serviceType: "gaming", discoveryInfo: nil, session: session)
-     //   connectedPeers = [MCPeerID]()
+        //   connectedPeers = [MCPeerID]()
         
         assistant.start()
         session.delegate = self
         browser.delegate = self
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     @IBAction func connectToUsers(_ sender: UIBarButtonItem) {
@@ -123,8 +127,13 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
         if let destination = segue.destination as? GameViewController {
             destination.session = self.session
             destination.peerID = self.peerID
+            session.delegate = destination
         }
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        initializeVals()
+//    }
     
     
     
