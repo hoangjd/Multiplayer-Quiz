@@ -16,26 +16,14 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
     @IBOutlet weak var buttonC: UIButton!
     @IBOutlet weak var buttonD: UIButton!
     
-    
-    
     @IBOutlet var arrayOfUserChoices: [UILabel]!
-    
-    
     @IBOutlet var arrayOfUserScores: [UILabel]!
     
-//    @IBOutlet weak var user1ChoiceLabel: UILabel!
-//    @IBOutlet weak var user1ScoreLabel: UILabel!
-//    @IBOutlet weak var user2ChoiceLabel: UILabel!
-//    @IBOutlet weak var user2ScoreLabel: UILabel!
-//    @IBOutlet weak var user3ChoiceLabel: UILabel!
-//    @IBOutlet weak var user3ScoreLabel: UILabel!
-//    @IBOutlet weak var user4ChoiceLabel: UILabel!
-//    @IBOutlet weak var user4ScoreLabel: UILabel!
-//
     @IBOutlet weak var questionNumLabel: UILabel!
     @IBOutlet weak var questionText: UITextView!
     
     @IBOutlet weak var winLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
     @IBOutlet weak var restartButton: UIButton!
     
@@ -45,6 +33,9 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
     var userScore: Int!
     var correctAnswer: String!
    // var userAnswer: String!
+    var numberOfQuestions: Int!
+    var timeToNextQuestion: Int!
+    var questionSearchCount: Int!
     
 
     @IBOutlet var arrayOfImages: [UIImageView]!
@@ -58,19 +49,26 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
         
     }
     
+    
+    //initialize all of our globals and sets base environment
     func initializeValues() {
         restartButton.isHidden = true
         winLabel.isHidden = true
         doubleClick = false
         userScore = 0
         correctAnswer = "A"
+        numberOfQuestions = -2
+        timeToNextQuestion = 0
+        questionSearchCount = 0
         initializeScores()
         setUpPlayersImages()
+        startTimer()
+        changeTimeLabel()
         
     }
     
     
-    
+    // this hides unused images and unhides used images based on amt of players
     func setUpPlayersImages() {
         for i in 1..<arrayOfImages.count {
             arrayOfImages[i].isHidden = true
@@ -87,31 +85,27 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
     
     @IBAction func buttonAClicked(_ sender: UIButton) {
         buttonLogic(sender: sender)
-     //   checkForUserChoice()
     }
     
     @IBAction func buttonBClicked(_ sender: UIButton) {
         buttonLogic(sender: sender)
-    //    checkForUserChoice()
     }
     
     @IBAction func buttonCClicked(_ sender: UIButton) {
         buttonLogic(sender: sender)
-     //   checkForUserChoice()
     }
     
     @IBAction func buttonDClicked(_ sender: UIButton) {
         buttonLogic(sender: sender)
-       // checkForUserChoice()
     }
     
+    //logic for choosing answer
     func buttonLogic(sender: UIButton) {
         if !doubleClick {
             if sender.backgroundColor == UIColor.red {
                 doubleClick = true
                 sender.backgroundColor = UIColor.green
                 checkForUserChoice()
-                addScore()
             } else {
                 clearButtons()
                 sender.backgroundColor = UIColor.red
@@ -119,6 +113,7 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
         }
     }
     
+    //decides what choice you made
     func checkForUserChoice() {
         var userAnswer = ""
         switch UIColor.green {
@@ -138,15 +133,11 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
             userAnswer = "..."
             setAndSendAnswer(answer: userAnswer)
         }
-//        if userAnswer == correctAnswer {
-//            userScore! += 1
-//
-//         //   changeScoreLabel()
-//        }
+
     }
     
+    //this checks your answer with the correct answer and updates your score
     func addScore() {
-        
         let mychoice = arrayOfUserChoices[0].text!
         if mychoice == correctAnswer {
             userScore! += 1
@@ -161,19 +152,15 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
             print ("Error in sending Score \(err)")
         }
         
-        
-//        for i in 0..<session.connectedPeers.count +1 {
-//            if arrayOfUserChoices[i].text! == correctAnswer {
-//                arrayOfUserScores[i].text ==
-//            }
-//        }
     }
     
+    //sets your answer on your device and calls send answer
     func setAndSendAnswer(answer: String) {
         arrayOfUserChoices[0].text = answer
         showUserAnswer(ans: answer)
     }
     
+    //send user answer to other players
     func showUserAnswer(ans: String) {
         let notifyUsersOfAnswer = NSKeyedArchiver.archivedData(withRootObject: ans)
         do {
@@ -182,11 +169,7 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
         catch let err {
             print ("Error in sending data \(err)")
         }
-//        for i in 0..<session.connectedPeers.count {
-//            if session.connectedPeers[i] == peer {
-//                arrayOfUserChoices[i].text = ans
-//            }
-//        }
+
     }
     
     func clearButtons() {
@@ -196,6 +179,7 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
         buttonD.backgroundColor = UIColor.lightGray
     }
     
+    //set all active users score labels to 0
     func initializeScores(){
         arrayOfUserScores[0].text = String(userScore!)
         for i in 0..<session.connectedPeers.count {
@@ -203,8 +187,137 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
         }
     }
     
+    //set all active users answer lables to ...
+    func initializeAnswerLabels(){
+        arrayOfUserChoices[0].text = "..."
+        for i in 0..<session.connectedPeers.count {
+            arrayOfUserChoices[i+1].text = "..."
+        }
+    }
     
-
+    
+    
+    //this is called every 20 seconds to update questions from json response
+    func getJSONData(questionNumber: Int){
+        
+        let urlString = "http://www.people.vcu.edu/~ebulut/jsonFiles/quiz1.json"
+        
+        
+        let url = URL(string: urlString)
+        
+        let session = URLSession.shared
+        
+        // create a data task
+        let task = session.dataTask(with: url!, completionHandler: { (data, response, error) in
+            
+            if let result = data{
+                
+                print("inside get JSON")
+                print(result)
+                do{
+                    let json = try JSONSerialization.jsonObject(with: result, options: .allowFragments)
+                    DispatchQueue.main.async(execute: {
+                        
+                        
+                        if let dictionary = json as? [String:Any]{
+                            let numberOfQuestions = dictionary["numberOfQuestions"] as! Int
+                            self.numberOfQuestions = numberOfQuestions
+                            if let allQuestion = dictionary["questions"] as? [[String:Any]] {
+                                let questionNum = allQuestion[questionNumber]["number"] as! Int
+                                self.questionNumLabel.text = ("Question:\(questionNum)/\(numberOfQuestions)")
+                                let questionSentence = allQuestion[questionNumber]["questionSentence"] as! String
+                                self.questionText.text = questionSentence
+                                if let answers = allQuestion[questionNumber]["options"] as? [String:Any] {
+                                    let AnsA = answers["A"] as! String
+                                    let AnsB = answers["B"] as! String
+                                    let AnsC = answers["C"] as! String
+                                    let AnsD = answers["D"] as! String
+                                    self.buttonA.setTitle(AnsA, for: .normal)
+                                    self.buttonB.setTitle(AnsB, for: .normal)
+                                    self.buttonC.setTitle(AnsC, for: .normal)
+                                    self.buttonD.setTitle(AnsD, for: .normal)
+                                    //       }
+                                    self.correctAnswer = allQuestion[questionNumber]["correctOption"] as! String
+                                    
+                                }
+                            }
+                            let topic = dictionary["topic"] as! String
+                            print(topic)
+                        }
+                    })
+                }
+                catch{
+                    print("Error")
+                }
+            }
+        })
+        
+        // always call resume() to start
+        task.resume()
+    }
+    
+    func checkIfUserWon() {
+        for i in 0..<session.connectedPeers.count {
+            if Int(arrayOfUserScores[0].text!)! >= Int(arrayOfUserScores[i+1].text!)! {
+                winLabel.text = "YOU WIN!"
+                return
+            }
+        }
+        winLabel.text = "YOU LOSE"
+    }
+    
+    
+    func startTimer() {
+        let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(updateTime)), userInfo: nil, repeats: true)
+    }
+    
+    func changeTimeLabel() {
+        var time = String(20 - timeToNextQuestion)
+        timeLabel.text = ("Time Left: \(time)")
+    }
+    
+    @objc func updateTime(_ sender: Timer) {
+        timeToNextQuestion! += 1
+        //lastquestion
+        if (questionSearchCount > (numberOfQuestions) && questionSearchCount != 0) {
+            restartButton.isHidden = false
+            winLabel.isHidden = false
+            checkIfUserWon()
+            sender.invalidate()
+        } else { //firstquestion
+            changeTimeLabel()
+            if questionSearchCount == 0 && timeToNextQuestion == 1{
+                getJSONData(questionNumber: questionSearchCount)
+                questionSearchCount! += 1
+            }
+            //middle questions
+            if timeToNextQuestion%20 == 0 {
+                addScore()
+                initializeAnswerLabels()
+                clearButtons()
+                doubleClick = false
+                timeToNextQuestion = 0
+                if questionSearchCount != 4 {
+                    getJSONData(questionNumber: questionSearchCount)
+                }
+                questionSearchCount! += 1
+            }
+        }
+    }
+    
+    @IBAction func restartButtonPushed(_ sender: UIButton) {
+        let restartFlag = "Restart"
+        let restart = NSKeyedArchiver.archivedData(withRootObject: restartFlag)
+        do {
+            try session.send(restart, toPeers: session.connectedPeers, with: .unreliable)
+        }
+        catch let err {
+            print("Error in Restart\(err)")
+        }
+        
+        initializeValues()
+    }
+    
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case MCSessionState.connected:
@@ -219,14 +332,19 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
         }
     }
     
+    //how others recieve data
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         print("inside didReceiveData")
         
         // this needs to be run on the main thread
         print(session.connectedPeers.count)
         DispatchQueue.main.async(execute: {
-            
+            //user answer recieved
             if let receivedString = NSKeyedUnarchiver.unarchiveObject(with: data) as? String{
+                if receivedString == "Restart" {
+                    self.initializeValues()
+                    return
+                }
                 for i in 0..<session.connectedPeers.count {
                     if session.connectedPeers[i] == peerID {
                         self.arrayOfUserChoices[i+1].text = receivedString
@@ -235,6 +353,7 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
                 }
             }
             
+            //user score recieved
             if let receviedInt = NSKeyedUnarchiver.unarchiveObject(with: data) as? Int{
                 for i in 0..<session.connectedPeers.count {
                     if session.connectedPeers[i] == peerID {
@@ -269,32 +388,11 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
         
     }
     
-
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destination = segue.destination as? ViewController {
-//            destination.session = self.session
-//            destination.peerID = self.peerID
-//            session.delegate = destination
-//        }
-//    }
-    
+    //user disconnect when they leave this view
     override func viewWillDisappear(_ animated: Bool) {
         self.session.disconnect()
         }
     
- //   }
-    
-//    extension GameViewController: UINavigationControllerDelegate {
-//        func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-//            (viewController as? ProgressTableViewController)?.data = data // Here you pass the to your original view controller
-//        }
-//    }
-//
-
-
-    
-
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

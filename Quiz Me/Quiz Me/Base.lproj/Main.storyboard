@@ -324,7 +324,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmd-Qe-zvn" userLabel="WinLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmd-Qe-zvn" userLabel="WinLabel">
                                 <rect key="frame" x="20" y="481" width="335" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -332,7 +332,10 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuR-9j-9py" userLabel="RestartButton">
                                 <rect key="frame" x="20" y="522" width="335" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Restart Game"/>
+                                <connections>
+                                    <action selector="restartButtonPushed:" destination="ylf-L2-e9W" eventType="touchUpInside" id="KD2-Dv-Clm"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWE-IS-dwP" userLabel="Player1Score">
                                 <rect key="frame" x="34" y="214.5" width="42" height="21"/>
@@ -354,6 +357,12 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JU8-Hb-lL7" userLabel="Player4Score">
                                 <rect key="frame" x="299" y="214.5" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0o-6k-lQg">
+                                <rect key="frame" x="166" y="572" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -407,6 +416,7 @@
                             <constraint firstItem="fYe-cx-ZKu" firstAttribute="top" secondItem="MhH-1E-Qig" secondAttribute="bottom" constant="15" id="dMt-Oa-yLn"/>
                             <constraint firstItem="nuH-uW-Alp" firstAttribute="height" secondItem="6rO-zO-9Yr" secondAttribute="height" id="e20-ir-yfG"/>
                             <constraint firstItem="1KQ-Zy-53Q" firstAttribute="centerX" secondItem="0Sh-6O-qKN" secondAttribute="centerX" id="e2U-KB-482"/>
+                            <constraint firstItem="u0o-6k-lQg" firstAttribute="top" secondItem="GuR-9j-9py" secondAttribute="bottom" constant="20" id="hZJ-iy-OhI"/>
                             <constraint firstItem="6rO-zO-9Yr" firstAttribute="top" secondItem="nuH-uW-Alp" secondAttribute="bottom" constant="15" id="hzj-n2-6ww"/>
                             <constraint firstItem="cwe-g2-R3u" firstAttribute="centerX" secondItem="49B-eW-r2g" secondAttribute="centerX" id="iD8-Ce-nEC"/>
                             <constraint firstItem="49B-eW-r2g" firstAttribute="leading" secondItem="qoa-bX-ggx" secondAttribute="leading" constant="20" id="iPJ-mI-eLl"/>
@@ -426,6 +436,7 @@
                             <constraint firstItem="fYe-cx-ZKu" firstAttribute="leading" secondItem="qoa-bX-ggx" secondAttribute="leading" constant="20" id="wAh-fa-bIA"/>
                             <constraint firstItem="B66-Nf-BWn" firstAttribute="height" secondItem="0Sh-6O-qKN" secondAttribute="height" id="wWn-bK-hqD"/>
                             <constraint firstItem="B66-Nf-BWn" firstAttribute="leading" secondItem="49B-eW-r2g" secondAttribute="trailing" constant="16" id="xXy-CE-ZlZ"/>
+                            <constraint firstItem="u0o-6k-lQg" firstAttribute="centerX" secondItem="yn0-AU-h2I" secondAttribute="centerX" id="yi9-Ug-fn0"/>
                             <constraint firstItem="MhH-1E-Qig" firstAttribute="top" secondItem="mWE-IS-dwP" secondAttribute="bottom" constant="15" id="z10-sH-P9m"/>
                             <constraint firstItem="1KQ-Zy-53Q" firstAttribute="top" secondItem="qoa-bX-ggx" secondAttribute="top" constant="30.5" id="zTZ-vy-QVT"/>
                             <constraint firstItem="nuH-uW-Alp" firstAttribute="width" secondItem="6rO-zO-9Yr" secondAttribute="width" id="zle-ws-2sH"/>
@@ -440,6 +451,7 @@
                         <outlet property="questionNumLabel" destination="MhH-1E-Qig" id="37G-lf-Yif"/>
                         <outlet property="questionText" destination="yR9-cq-M81" id="GJp-XI-Gwr"/>
                         <outlet property="restartButton" destination="GuR-9j-9py" id="8aj-18-q1C"/>
+                        <outlet property="timeLabel" destination="u0o-6k-lQg" id="J4Y-EC-Hmq"/>
                         <outlet property="winLabel" destination="gmd-Qe-zvn" id="Vxs-Kv-bWs"/>
                         <outletCollection property="arrayOfImages" destination="49B-eW-r2g" collectionClass="NSMutableArray" id="G6s-aU-Wzt"/>
                         <outletCollection property="arrayOfImages" destination="B66-Nf-BWn" collectionClass="NSMutableArray" id="qdl-GO-5CD"/>
