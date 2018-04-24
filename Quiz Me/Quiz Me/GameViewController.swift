@@ -297,7 +297,7 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
                 clearButtons()
                 doubleClick = false
                 timeToNextQuestion = 0
-                if questionSearchCount != 4 {
+                if questionSearchCount != numberOfQuestions {
                     getJSONData(questionNumber: questionSearchCount)
                 }
                 questionSearchCount! += 1
