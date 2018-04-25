@@ -117,16 +117,16 @@ class GameViewController: UIViewController, MCSessionDelegate, UINavigationContr
     func checkForUserChoice() {
         var userAnswer = ""
         switch UIColor.green {
-        case buttonA.backgroundColor:
+        case buttonA.backgroundColor!:
             userAnswer = "A"
             setAndSendAnswer(answer: userAnswer)
-        case buttonB.backgroundColor:
+        case buttonB.backgroundColor!:
             userAnswer = "B"
             setAndSendAnswer(answer: userAnswer)
-        case buttonC.backgroundColor:
+        case buttonC.backgroundColor!:
             userAnswer = "C"
             setAndSendAnswer(answer: userAnswer)
-        case buttonD.backgroundColor:
+        case buttonD.backgroundColor!:
             userAnswer = "D"
             setAndSendAnswer(answer: userAnswer)
         default:

@@ -189,13 +189,13 @@ class SingleGameViewController: UIViewController {
     func checkAnswer() {
         var userAnswer = ""
         switch UIColor.green {
-        case buttonA.backgroundColor:
+        case buttonA.backgroundColor!:
             userAnswer = "A"
-        case buttonB.backgroundColor:
+        case buttonB.backgroundColor!:
             userAnswer = "B"
-        case buttonC.backgroundColor:
+        case buttonC.backgroundColor!:
             userAnswer = "C"
-        case buttonD.backgroundColor:
+        case buttonD.backgroundColor!:
             userAnswer = "D"
         default:
             userAnswer = ""

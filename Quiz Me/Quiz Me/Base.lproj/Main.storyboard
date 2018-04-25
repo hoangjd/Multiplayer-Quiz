@@ -20,33 +20,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rWl-WM-hz4" userLabel="SegmentedPlayer">
-                                <rect key="frame" x="20" y="334.5" width="335" height="29"/>
+                                <rect key="frame" x="20" y="341" width="335" height="29"/>
                                 <segments>
                                     <segment title="Single Player"/>
                                     <segment title="Multiplayer"/>
                                 </segments>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WBB-cT-UIY" userLabel="StartButton">
-                                <rect key="frame" x="148.5" y="382.5" width="78" height="30"/>
+                                <rect key="frame" x="148.5" y="389" width="78" height="30"/>
                                 <state key="normal" title="Start Game"/>
                                 <connections>
                                     <action selector="startGameClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w26-Vc-i3I"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QuizMe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ft4-te-wsv" userLabel="Title">
-                                <rect key="frame" x="30" y="89" width="315" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="30" y="89" width="315" height="27.5"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="singlePerson" translatesAutoresizingMaskIntoConstraints="NO" id="weL-Ks-q1W">
-                                <rect key="frame" x="20" y="157" width="162.5" height="162.5"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="single" translatesAutoresizingMaskIntoConstraints="NO" id="weL-Ks-q1W">
+                                <rect key="frame" x="20" y="163.5" width="162.5" height="162.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="weL-Ks-q1W" secondAttribute="height" multiplier="1:1" id="JGe-kp-68f"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="multiplayer" translatesAutoresizingMaskIntoConstraints="NO" id="Qjz-TW-3nL">
-                                <rect key="frame" x="192.5" y="157" width="162" height="162.5"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="network" translatesAutoresizingMaskIntoConstraints="NO" id="Qjz-TW-3nL">
+                                <rect key="frame" x="192.5" y="163.5" width="162" height="162.5"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -367,6 +367,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUK-dX-HCY">
+                                <rect key="frame" x="41" y="169" width="25" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -491,11 +498,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="multiplayer" width="640" height="426"/>
+        <image name="network" width="640" height="480"/>
         <image name="person1 " width="498" height="592"/>
         <image name="person2 " width="255" height="299"/>
         <image name="person3 " width="510" height="598"/>
         <image name="person4 " width="255" height="299"/>
-        <image name="singlePerson" width="640" height="640"/>
+        <image name="single" width="254" height="254"/>
     </resources>
 </document>
