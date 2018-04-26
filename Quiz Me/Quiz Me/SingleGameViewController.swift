@@ -164,22 +164,17 @@ class SingleGameViewController: UIViewController {
         super.viewWillAppear(animated)
         
         motionManager.deviceMotionUpdateInterval = 1/60
-        
         motionManager.startDeviceMotionUpdates(using: .xArbitraryZVertical)
-        
         Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateDeviceMotion), userInfo: nil, repeats: true)
-        
     }
     
     @objc func updateDeviceMotion(){
         
         if let data = motionManager.deviceMotion {
-            
             let attitude = data.attitude
             let userAcceleration = data.userAcceleration
             
             if (attitude.roll > 1.0){
-                
                 if(buttonA.backgroundColor == UIColor.red){
                     buttonA.backgroundColor = UIColor.lightGray
                     buttonBClicked(buttonB)
@@ -192,7 +187,6 @@ class SingleGameViewController: UIViewController {
             }
             
             if(attitude.roll < -1.0){
-                
                 if(buttonB.backgroundColor == UIColor.red){
                     buttonB.backgroundColor = UIColor.lightGray
                     buttonAClicked(buttonA)
@@ -203,10 +197,8 @@ class SingleGameViewController: UIViewController {
                     buttonCClicked(buttonC)
                 }
             }
-            
           
             if(attitude.pitch > 1.0){
-                
                 if(buttonA.backgroundColor == UIColor.red){
                     buttonA.backgroundColor = UIColor.lightGray
                     buttonCClicked(buttonC)
@@ -218,9 +210,7 @@ class SingleGameViewController: UIViewController {
                 }
             }
             
-         
             if(attitude.pitch < -1.0){
-                
                 if(buttonC.backgroundColor == UIColor.red){
                     buttonC.backgroundColor = UIColor.lightGray
                     buttonAClicked(buttonA)
@@ -232,48 +222,57 @@ class SingleGameViewController: UIViewController {
                 }
             }
             
-      
             if(attitude.yaw > 1.0 || attitude.yaw < -1.0){
-                
                 if(buttonA.backgroundColor == UIColor.red){
                     buttonA.backgroundColor = UIColor.green
+                    doubleClick = true
+                    
                 }
                 
                 if(buttonB.backgroundColor == UIColor.red){
                     buttonB.backgroundColor = UIColor.green
+                    doubleClick = true
+                    
                 }
                 
                 if(buttonC.backgroundColor == UIColor.red){
                     buttonC.backgroundColor = UIColor.green
+                    doubleClick = true
+                  
                 }
                 
                 if(buttonD.backgroundColor == UIColor.red){
                     buttonD.backgroundColor = UIColor.green
+                    doubleClick = true
+                   
                 }
-                
             }
            
-          
             if(userAcceleration.z < -1.0){
-                
                 if(buttonA.backgroundColor == UIColor.red){
                     buttonA.backgroundColor = UIColor.green
+                    doubleClick = true
+                  
                 }
                 
                 if(buttonB.backgroundColor == UIColor.red){
                     buttonB.backgroundColor = UIColor.green
+                    doubleClick = true
+                    
                 }
                 
                 if(buttonC.backgroundColor == UIColor.red){
                     buttonC.backgroundColor = UIColor.green
+                    doubleClick = true
+                    
                 }
                 
                 if(buttonD.backgroundColor == UIColor.red){
                     buttonD.backgroundColor = UIColor.green
+                    doubleClick = true
+                    
                 }
-                
             }
-            
         }
     }
     
