@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreMotion
 
 class SingleGameViewController: UIViewController {
     
@@ -28,6 +29,8 @@ class SingleGameViewController: UIViewController {
     var userChoice: String!
     var doubleClick: Bool!
     var userScore: Int!
+    
+    var motionManager = CMMotionManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -157,6 +160,144 @@ class SingleGameViewController: UIViewController {
         task.resume()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        motionManager.deviceMotionUpdateInterval = 1/60
+        
+        motionManager.startDeviceMotionUpdates(using: .xArbitraryZVertical)
+        
+        Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateDeviceMotion), userInfo: nil, repeats: true)
+        
+    }
+    
+    @objc func updateDeviceMotion(){
+        
+        if let data = motionManager.deviceMotion {
+            
+            let attitude = data.attitude
+            let userAcceleration = data.userAcceleration
+            
+            if (attitude.roll > 1.0){
+                
+                if(buttonA.backgroundColor == UIColor.red){
+                    buttonA.backgroundColor = UIColor.lightGray
+                    buttonBClicked(buttonB)
+                }
+                
+                if(buttonC.backgroundColor == UIColor.red){
+                    buttonC.backgroundColor = UIColor.lightGray
+                    buttonDClicked(buttonD)
+                }
+            }
+            
+            if(attitude.roll < -1.0){
+                
+                if(buttonB.backgroundColor == UIColor.red){
+                    buttonB.backgroundColor = UIColor.lightGray
+                    buttonAClicked(buttonA)
+                }
+                
+                if(buttonD.backgroundColor == UIColor.red){
+                    buttonD.backgroundColor = UIColor.lightGray
+                    buttonCClicked(buttonC)
+                }
+            }
+            
+          
+            if(attitude.pitch > 1.0){
+                
+                if(buttonA.backgroundColor == UIColor.red){
+                    buttonA.backgroundColor = UIColor.lightGray
+                    buttonCClicked(buttonC)
+                }
+                
+                if(buttonB.backgroundColor == UIColor.red){
+                    buttonB.backgroundColor = UIColor.lightGray
+                    buttonDClicked(buttonD)
+                }
+            }
+            
+         
+            if(attitude.pitch < -1.0){
+                
+                if(buttonC.backgroundColor == UIColor.red){
+                    buttonC.backgroundColor = UIColor.lightGray
+                    buttonAClicked(buttonA)
+                }
+                
+                if(buttonD.backgroundColor == UIColor.red){
+                    buttonD.backgroundColor = UIColor.lightGray
+                    buttonBClicked(buttonB)
+                }
+            }
+            
+      
+            if(attitude.yaw > 1.0 || attitude.yaw < -1.0){
+                
+                if(buttonA.backgroundColor == UIColor.red){
+                    buttonA.backgroundColor = UIColor.green
+                }
+                
+                if(buttonB.backgroundColor == UIColor.red){
+                    buttonB.backgroundColor = UIColor.green
+                }
+                
+                if(buttonC.backgroundColor == UIColor.red){
+                    buttonC.backgroundColor = UIColor.green
+                }
+                
+                if(buttonD.backgroundColor == UIColor.red){
+                    buttonD.backgroundColor = UIColor.green
+                }
+                
+            }
+           
+          
+            if(userAcceleration.z < -1.0){
+                
+                if(buttonA.backgroundColor == UIColor.red){
+                    buttonA.backgroundColor = UIColor.green
+                }
+                
+                if(buttonB.backgroundColor == UIColor.red){
+                    buttonB.backgroundColor = UIColor.green
+                }
+                
+                if(buttonC.backgroundColor == UIColor.red){
+                    buttonC.backgroundColor = UIColor.green
+                }
+                
+                if(buttonD.backgroundColor == UIColor.red){
+                    buttonD.backgroundColor = UIColor.green
+                }
+                
+            }
+            
+        }
+    }
+    
+    //Randomly choose answer when shake
+    override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+        
+        if motion == .motionShake {
+            var choose = Int(arc4random_uniform(UInt32(3)))
+        
+            switch choose{
+                case 0:
+                    buttonAClicked(buttonA)
+                
+                case 1:
+                    buttonBClicked(buttonB)
+                
+                case 2:
+                    buttonCClicked(buttonC)
+                
+                default:
+                    buttonDClicked(buttonD)
+            }
+        }
+    }
     
     @IBAction func buttonAClicked(_ sender: UIButton) {
         buttonLogic(sender: sender)
